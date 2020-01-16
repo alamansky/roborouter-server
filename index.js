@@ -15,7 +15,7 @@ app.post("/", (req, res) => {
     });
   }
 
-  res.send("hello world");
+  res.status(200);
 });
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`));
