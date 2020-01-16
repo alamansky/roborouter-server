@@ -11,11 +11,11 @@ app.post("/", (req, res) => {
   for (tech in routeObj) {
     app.get(`/${tech}`, (req, res) => {
       console.log(routeObj[tech]);
-      res.json(routeObj[tech]);
+      res.status(200).json(routeObj[tech]);
     });
   }
 
-  res.status(200);
+  res.status(200).json({ message: "success!" });
 });
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`));
