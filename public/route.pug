@@ -1,0 +1,23 @@
+extends layout.pug
+
+block content
+  h2= `${locals.tech}\t|\t${new Date().getMonth() + 1}-${new Date().getDate()}-${new Date().getFullYear()}`
+  <br>
+  table#routeTable
+    thead
+      tr
+        th Address
+        th Meter Number
+        th Meter Location
+        th Meter Information
+    tbody
+      each street in locals.arr
+        each wo in street
+            tr
+              td= wo[0].join(' ')
+              td= wo[1][0]
+              td= wo[1][1]
+              td= wo[1][2].split('   ')[1]
+
+block scripts
+  script(src='/js/script.js')

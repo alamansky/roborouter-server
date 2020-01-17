@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+    p#intro RoboRouter is experimental software developed by Andrew Lamansky that uses the MapQuest API to route work orders. Results not garunteed. Feedback welcome.
+    p Please enter your FSR:
+    form
+        input(type="text" id="FSR" name="FSR" required)
+        label(for="FSR")
+    a(href=locals.app)#submit Route My List
+
+block scripts
+    script(src='/js/index.js')

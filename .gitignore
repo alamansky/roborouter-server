@@ -19,3 +19,7 @@ yarn-error.log*
 # routes
 /routes/*
 *.csv
+
+#test data
+
+populateTestData.js
