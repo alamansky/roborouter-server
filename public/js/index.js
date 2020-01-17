@@ -1,11 +1,9 @@
-const config = require("../../config");
-
 const submitButton = document.querySelector("#submit");
 
 const input = document.querySelector("#FSR");
 
 let handleChange = e => {
-  submitButton.href = `${config.app}/${input.value}`;
+  submitButton.href = `https://roborouter.herokuapp.com/${input.value}`;
 };
 
 input.addEventListener("input", e => handleChange(e));
