@@ -1,10 +1,11 @@
+const config = require("../../config");
+
 const submitButton = document.querySelector("#submit");
 
 const input = document.querySelector("#FSR");
 
 let handleChange = e => {
-  submitButton.href = `http://localhost:3000/${input.value}`;
-  console.log(submitButton.href);
+  submitButton.href = `${config.app}/${input.value}`;
 };
 
 input.addEventListener("input", e => handleChange(e));
