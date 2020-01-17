@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const populateTestData = require("./util/populateTestData");
+//const populateTestData = require("./util/populateTestData");
 const config = require("./config");
 
 const PORT = process.env.PORT || 3000;
