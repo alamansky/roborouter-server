@@ -136,6 +136,8 @@ input {
   background-color: rgba(0, 0, 0, 0);
   outline: 0;
   border: 0;
+  width: 10rem;
+  height: 10rem;
 }
 
 .route-list--row:nth-child(2n) {

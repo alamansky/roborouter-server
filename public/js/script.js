@@ -35,7 +35,7 @@ let handleClick = e => {
         getElementByKey(key, "row").style.opacity = "0.5";
         getElementByKey(key, "check").checked = true;
       } else {
-        getElementByKey(key, "address").style.textDecoration = "line-through";
+        getElementByKey(key, "address").style.textDecoration = "none";
         getElementByKey(key, "row").style.opacity = "1";
         getElementByKey(key, "check").checked = false;
       }
@@ -52,10 +52,19 @@ let handleClick = e => {
       console.log((progress / total) * 100);
       break;
     }
-    case /button|svg|path/.test(elem.tagName): {
-      let num = e.target.tagName == "svg" ? 1 : 2;
-      let closestElem = e.path[num];
-      let key = getKey(closestElem, "icon");
+    case /BUTTON|button|svg|path/.test(elem.tagName): {
+      let findKeyByBubble = elem => {
+        if (elem.tagName == "button" || elem.tagName == "BUTTON") {
+          return getKey(elem, "icon");
+        } else {
+          let num = e.target.tagName == "svg" ? 1 : 2;
+          let findButton = e.path[num];
+          return getKey(findButton, "icon");
+        }
+      };
+
+      let key = findKeyByBubble(elem);
+
       state[key].open = !state[key].open;
       let action = state[key].open ? "block" : "none";
 
