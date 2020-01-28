@@ -19,7 +19,6 @@ const getElementByKey = (key, component) =>
   document.querySelector(`[data-${component}='${component}:${key}']`);
 
 let handleClick = e => {
-  e.preventDefault();
   let elem = e.target;
 
   switch (true) {
@@ -49,20 +48,8 @@ let handleClick = e => {
         100}%`;
       break;
     }
-    case /BUTTON|button|svg|path/.test(elem.tagName): {
-      let findKeyByBubble = elem => {
-        if (elem.tagName == "button" || elem.tagName == "BUTTON") {
-          return getKey(elem, "icon");
-        } else {
-          for (let i = 0; e.path[i].tagName != "body"; ++i) {
-            if (e.path[i] && e.path[i].tagName == "BUTTON") {
-              return getKey(e.path[i], "icon");
-            }
-          }
-        }
-      };
-
-      let key = findKeyByBubble(elem);
+    case /BUTTON|button/.test(elem.tagName): {
+      let key = getKey(elem, "icon");
       state[key].open = !state[key].open;
 
       if (state[key].open) {
@@ -76,5 +63,4 @@ let handleClick = e => {
   }
 };
 
-/* list.addEventListener("click", e => handleClick(e)); */
-list.addEventListener("touch", e => handleClick(e));
+list.addEventListener("click", e => handleClick(e));

@@ -10,8 +10,7 @@ block content
               span
                 input(type='checkbox' name='address' data-check=`check:${index1}-${index2}`).route-list--check
               p.route-list--address(data-address=`address:${index1}-${index2}`)= wo[0].slice(0, 2).join(' ')
-              button.icon--plus(data-icon=`icon:${index1}-${index2}`)
-                include icons/plus.pug
+              button.icon--plus.gg-add(data-icon=`icon:${index1}-${index2}`)
               div.address--details(data-details=`details:${index1}-${index2}`)
                 ul.address--details--list
                   li.address--details--row
