@@ -101,7 +101,7 @@ input {
 }
 
 .route-list--row {
-  padding: 1rem;
+  padding: 1rem 3rem 1rem 1rem;
   border-bottom: 1px solid black;
   display: flex;
   flex-wrap: wrap;
@@ -148,7 +148,6 @@ input {
   border: 2px solid;
   transform: scale(var(--ggs, 1));
   border-radius: 22px;
-  margin-right: 2rem;
   color: rgba(0, 0, 0, 0.5);
 }
 .gg-add::after,
