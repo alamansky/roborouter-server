@@ -27,13 +27,12 @@ app.post("/", (req, res) => {
       });
     });
   }
-
-  app.get("*", (req, res) => {
-    res.render(path.join(__dirname + "/public/404.pug"), { app: config.app });
-  });
-
   res.status(200).json({ message: "success!" });
 });
+
+/* app.get("*", (req, res) => {
+  res.render(path.join(__dirname + "/public/404.pug"), { app: config.app });
+}); */
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`));
 
