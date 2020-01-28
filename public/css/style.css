@@ -174,3 +174,7 @@ input {
   max-width: 70%;
   text-align: center;
 }
+
+.visible {
+  display: block !important;
+}

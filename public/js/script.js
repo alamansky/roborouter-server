@@ -2,8 +2,6 @@ const list = document.querySelector(".route-list");
 
 const addresses = Array.from(document.querySelectorAll(".route-list--address"));
 
-console.log(addresses);
-
 // init state
 const state = {};
 
@@ -22,7 +20,6 @@ const getElementByKey = (key, component) =>
 
 let handleClick = e => {
   let elem = e.target;
-  console.log(elem.tagName);
 
   switch (true) {
     case /P|INPUT/.test(elem.tagName): {
@@ -49,7 +46,6 @@ let handleClick = e => {
       document.querySelector(".progress-bar").style.width = `${(progress /
         total) *
         100}%`;
-      console.log((progress / total) * 100);
       break;
     }
     case /BUTTON|button|svg|path/.test(elem.tagName): {
@@ -66,9 +62,15 @@ let handleClick = e => {
       let key = findKeyByBubble(elem);
 
       state[key].open = !state[key].open;
-      let action = state[key].open ? "block" : "none";
+      /* let action = state[key].open ? "block" : "none"; */
 
-      getElementByKey(key, "details").style.display = action;
+      /* getElementByKey(key, "details").style.display = action; */
+
+      if (state[key].open) {
+        getElementByKey(key, "details").classList.add("visible");
+      } else {
+        getElementByKey(key, "details").classList.remove("visible");
+      }
 
       break;
     }
