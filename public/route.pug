@@ -1,23 +1,28 @@
 extends layout.pug
 
 block content
-  h2= `${locals.tech}\t|\t${new Date().getMonth() + 1}-${new Date().getDate()}-${new Date().getFullYear()}`
+  h2#subheader= `${locals.tech}\t|\t${new Date().getMonth() + 1}-${new Date().getDate()}-${new Date().getFullYear()}`
   <br>
-  table#routeTable
-    thead
-      tr
-        th Address
-        th Meter Number
-        th Meter Location
-        th Meter Information
-    tbody
-      each street in locals.arr
-        each wo in street
-            tr
-              td= wo[0].join(' ')
-              td= wo[1][0]
-              td= wo[1][1]
-              td= wo[1][2].split('   ')[1]
+    ul.route-list
+      each street, index1 in locals.arr
+        each wo, index2 in street
+            li.route-list--row(data-row=`row:${index1}-${index2}`)
+              span
+                input(type='checkbox' name='address' data-check=`check:${index1}-${index2}`).route-list--check
+              p.route-list--address(data-address=`address:${index1}-${index2}`)= wo[0].slice(0, 2).join(' ')
+              button.icon--plus(data-icon=`icon:${index1}-${index2}`)
+                include icons/plus.pug
+              div.address--details(data-details=`details:${index1}-${index2}`)
+                ul.address--details--list
+                  li.address--details--row
+                    span Meter Number:
+                    span= wo[1][0]
+                  li.address--details--row
+                    span Location:
+                    span= wo[1][1]
+                  li.address--details--row
+                    span Info:
+                    span= wo[1][2].split('   ')[1]
 
 block scripts
   script(src='/js/script.js')

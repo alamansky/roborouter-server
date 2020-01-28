@@ -1,13 +1,23 @@
+header {
+  background-color: red;
+  color: white;
+  padding: 2rem;
+}
+
 body {
-  color: rgba(0, 0, 0, 0.9);
+  color: black;
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 10px;
   font-family: sans-serif;
 }
 
+h1 {
+  font-size: 5rem;
+}
+
 h3 {
-  font-size: 18px;
+  font-size: 3rem;
 }
 
 table {
@@ -36,7 +46,7 @@ tr:hover {
 }
 
 footer {
-  z-index: -1;
+  /*   z-index: -1;
   position: fixed;
   bottom: 0;
   height: 50px;
@@ -47,26 +57,115 @@ footer {
   justify-content: center;
   align-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
+  position: fixed;
+  bottom: 0;
+  height: 2rem;
+  width: 100%;
+  background-color: red;
+}
+
+input {
+  height: 5rem;
+  width: 25rem;
+  font-size: 4rem;
+}
+
+.progress-bar {
+  background-color: green;
+  height: 100%;
+  width: 0;
+  transition: 0.2s ease all;
+}
+
+#subheader {
+  text-align: center;
 }
 
 .wrapper {
   position: relative;
   margin-bottom: 100px;
   background-color: white;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  flex-direction: column;
+  font-size: 3rem;
+  padding: 3rem;
 }
 
 .sneaky {
   opacity: 0.5;
 }
 
+.route-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.route-list--row {
+  padding: 1rem;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+}
+
+.route-list--address {
+  flex-basis: 1;
+  flex-grow: 1;
+}
+
+.address--details {
+  background-color: white;
+  width: 100%;
+  display: none;
+  padding: 2rem;
+}
+
+.address--details--list {
+  padding: 0;
+  margin: 0;
+}
+
+.address--details--row {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0 1rem 0;
+}
+
+.icon--plus {
+  background-color: rgba(0, 0, 0, 0);
+  outline: 0;
+  border: 0;
+}
+
+.route-list--row:nth-child(2n) {
+  background-color: lightblue;
+}
+
+.route-list--check {
+  height: 5rem;
+  width: 5rem;
+  margin-right: 2rem;
+  border-radius: 10px;
+}
+
+.button--primary {
+  height: 6rem;
+  width: 25rem;
+  font-size: 3rem;
+}
+
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 30vh;
+}
+
 #submit {
-  margin-top: 30px;
+  text-decoration: none;
+  color: black;
 }
 
 #intro {

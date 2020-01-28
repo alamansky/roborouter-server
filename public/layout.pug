@@ -5,12 +5,10 @@ html(lang="en")
         link(href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet")/
         title= RoboRouter
     body
-        div.wrapper
+        header
             h1 RoboRouter
+        div.wrapper
             block content
             block scripts
     footer
-        p
-            span &copy;
-            span= ` Andrew Lamansky ${new Date().getFullYear()}`
-        p.sneaky Tell Derrid to give me a raise.
+        div.progress-bar
