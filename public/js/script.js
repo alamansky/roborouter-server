@@ -19,6 +19,7 @@ const getElementByKey = (key, component) =>
   document.querySelector(`[data-${component}='${component}:${key}']`);
 
 let handleClick = e => {
+  e.preventDefault();
   let elem = e.target;
 
   switch (true) {
