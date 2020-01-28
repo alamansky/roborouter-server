@@ -76,4 +76,5 @@ let handleClick = e => {
   }
 };
 
-list.addEventListener("click", e => handleClick(e));
+/* list.addEventListener("click", e => handleClick(e)); */
+list.addEventListener("touch", e => handleClick(e));
