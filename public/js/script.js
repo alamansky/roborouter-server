@@ -54,18 +54,16 @@ let handleClick = e => {
         if (elem.tagName == "button" || elem.tagName == "BUTTON") {
           return getKey(elem, "icon");
         } else {
-          let num = e.target.tagName == "svg" ? 1 : 2;
-          let findButton = e.path[num];
-          return getKey(findButton, "icon");
+          for (let i = 0; e.path[i].tagName != "body"; ++i) {
+            if (e.path[i] && e.path[i].tagName == "BUTTON") {
+              return getKey(e.path[i], "icon");
+            }
+          }
         }
       };
 
       let key = findKeyByBubble(elem);
-
       state[key].open = !state[key].open;
-      /* let action = state[key].open ? "block" : "none"; */
-
-      /* getElementByKey(key, "details").style.display = action; */
 
       if (state[key].open) {
         getElementByKey(key, "details").classList.add("visible");
