@@ -36,7 +36,7 @@ app.get("/:tech", (req, res) => {
   if (state[req.params.tech.toLowerCase()]) {
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: config.prod,
-      arr: state[req.params.tech],
+      arr: state[req.params.tech.toLowerCase()],
       tech: req.params.tech
     });
   } else {
