@@ -26,14 +26,14 @@ app.post("/", (req, res) => {
   let route = req.body;
 
   for (let [key, value] of Object.entries(route)) {
-    state[key] = value;
+    state[key.toLowerCase()] = value;
   }
 
   res.status(200).json({ message: "success!" });
 });
 
 app.get("/:tech", (req, res) => {
-  if (state[req.params.tech]) {
+  if (state[req.params.tech.toLowerCase()]) {
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: config.prod,
       arr: state[req.params.tech],
