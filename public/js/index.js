@@ -5,13 +5,17 @@ const input = document.querySelector("#FSR");
 
 let handleChange = e => {
   e.preventDefault();
-  submitButton.href = `${submitButton.dataset.endpoint}/${input.value}`;
+  submitButton.href = `${
+    submitButton.dataset.endpoint
+  }/${input.value.toLowerCase()}`;
 };
 
 input.addEventListener("input", e => handleChange(e));
 body.addEventListener("keydown", e => {
   if (e.keyCode == 13) {
     e.preventDefault();
-    window.location = `${submitButton.dataset.endpoint}/${input.value}`;
+    window.location = `${
+      submitButton.dataset.endpoint
+    }/${input.value.toLowerCase()}`;
   }
 });

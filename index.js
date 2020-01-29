@@ -26,17 +26,18 @@ app.post("/", (req, res) => {
   let route = req.body;
 
   for (let [key, value] of Object.entries(route)) {
-    state[key.toLowerCase()] = value;
+    let lowerCaseKey = key.toLowerCase();
+    state[lowerCaseKey] = value;
   }
 
   res.status(200).json({ message: "success!" });
 });
 
 app.get("/:tech", (req, res) => {
-  if (state[req.params.tech.toLowerCase()]) {
+  if (state[req.params.tech]) {
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: config.prod,
-      arr: state[req.params.tech.toLowerCase()],
+      arr: state[req.params.tech],
       tech: req.params.tech
     });
   } else {
