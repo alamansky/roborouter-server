@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-/* const populateTestData = require("./util/populateTestData"); */
+const populateTestData = require("./util/populateTestData");
 const config = require("./config");
 
 /* const DEV = process.argv[2] != "--prodMode"; */
@@ -49,4 +49,4 @@ app.get("/:tech", (req, res) => {
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`));
 
-/* (async () => await populateTestData(PORT))(); */
+(async () => await populateTestData(PORT))();
