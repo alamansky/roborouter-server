@@ -4,9 +4,9 @@ const app = express();
 /* const populateTestData = require("./util/populateTestData"); */
 const config = require("./config");
 
-const DEV = process.argv[2] != "--prodMode";
+/* const DEV = process.argv[2] != "--prodMode"; */
 
-const PORT = process.env.PORT || DEV ? config.port : 443;
+const PORT = process.env.PORT || 443;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.render(path.join(__dirname + "/public/index.pug"), {
-    app: DEV ? config.dev : config.prod
+    app: config.prod
   });
 });
 
@@ -35,13 +35,13 @@ app.post("/", (req, res) => {
 app.get("/:tech", (req, res) => {
   if (state[req.params.tech]) {
     res.render(path.join(__dirname + "/public/route.pug"), {
-      app: DEV ? config.dev : config.prod,
+      app: config.prod,
       arr: state[req.params.tech],
       tech: req.params.tech
     });
   } else {
     res.render(path.join(__dirname + "/public/404.pug"), {
-      app: DEV ? config.dev : config.prod
+      app: config.prod
     });
   }
 });
