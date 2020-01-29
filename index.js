@@ -6,7 +6,9 @@ const config = require("./config");
 
 const DEV = process.argv[2] && process.argv[2] == "--devMode";
 
-const PORT = process.env.PORT || DEV ? 3000 : 443;
+const defaultPort = DEV ? 3000 : 443;
+
+const PORT = process.env.PORT || defaultPort;
 
 app.use(express.static(__dirname + "/public"));
 
