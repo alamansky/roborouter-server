@@ -7,7 +7,7 @@ block content
             input(type="text" id="FSR" name="FSR" required)
             label(for="FSR")
         button.button--primary
-            a(href=locals.app)#submit Route My List
+            a(href=locals.app, data-endpoint=locals.app)#submit Route My List
 
 block scripts
     script(src='/js/index.js')

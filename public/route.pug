@@ -18,7 +18,7 @@ block content
                     span= wo[1][0]
                   li.address--details--row
                     span Location:
-                    span= wo[1][1]
+                    span= wo[1][1].split('-').slice(-1)
                   li.address--details--row
                     span Info:
                     span= wo[1][2].split('   ')[1]

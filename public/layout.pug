@@ -6,9 +6,12 @@ html(lang="en")
         title= RoboRouter
     body
         header
-            h1 RoboRouter
+            a.home(href= locals.app)
+                i.gg-home
+            h1.title RoboRouter
         div.wrapper
             block content
             block scripts
+            script(src='/js/layout.js')
     footer
         div.progress-bar

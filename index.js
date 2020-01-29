@@ -4,7 +4,9 @@ const app = express();
 /* const populateTestData = require("./util/populateTestData"); */
 const config = require("./config");
 
-const PORT = process.env.PORT || 443;
+const DEV = process.argv[2] == "--devMode";
+
+const PORT = process.env.PORT || DEV ? config.port : 443;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -13,26 +15,36 @@ app.set("view engine", "pug");
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.render(path.join(__dirname + "/public/index.pug"), { app: config.app });
+  res.render(path.join(__dirname + "/public/index.pug"), {
+    app: DEV ? config.dev : config.prod
+  });
 });
 
-app.post("/", (req, res) => {
-  let routeObj = req.body;
+const state = {};
 
-  for (tech in routeObj) {
-    app.get(`/${tech}`, (req, res) => {
-      res.render(path.join(__dirname + "/public/route.pug"), {
-        arr: routeObj[tech],
-        tech
-      });
-    });
+app.post("/", (req, res) => {
+  let route = req.body;
+
+  for (let [key, value] of Object.entries(route)) {
+    state[key] = value;
   }
+
   res.status(200).json({ message: "success!" });
 });
 
-/* app.get("*", (req, res) => {
-  res.render(path.join(__dirname + "/public/404.pug"), { app: config.app });
-}); */
+app.get("/:tech", (req, res) => {
+  if (state[req.params.tech]) {
+    res.render(path.join(__dirname + "/public/route.pug"), {
+      app: DEV ? config.dev : config.prod,
+      arr: state[req.params.tech],
+      tech: req.params.tech
+    });
+  } else {
+    res.render(path.join(__dirname + "/public/404.pug"), {
+      app: DEV ? config.dev : config.prod
+    });
+  }
+});
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`));
 
