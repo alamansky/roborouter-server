@@ -4,7 +4,7 @@ const app = express();
 /* const populateTestData = require("./util/populateTestData"); */
 const config = require("./config");
 
-const DEV = process.argv[2] == "--devMode";
+const DEV = !(process.argv[2] == "--prodMode");
 
 const PORT = process.env.PORT || DEV ? config.port : 443;
 
