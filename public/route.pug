@@ -1,7 +1,11 @@
 extends layout.pug
+include components/warning.pug
 
 block content
-  h2#subheader= `${locals.tech}\t|\t${new Date().getMonth() + 1}-${new Date().getDate()}-${new Date().getFullYear()}`
+  h2#subheader= `${locals.tech}\t|\t${locals.date}`
+  div#dash
+    +warning('This list does not include appointments.')(id="appts")
+    +warning(`Last updated ${locals.timestamp} ago.`)(id="timestamp")
   <br>
     ul.route-list
       each street, index1 in locals.arr
@@ -25,3 +29,4 @@ block content
 
 block scripts
   script(src='/js/script.js')
+  script(src='/js/warning.js')

@@ -6,7 +6,7 @@ const addresses = Array.from(document.querySelectorAll(".route-list--address"));
 const state = {};
 
 //populate state
-for (i = 0; i < addresses.length; ++i) {
+for (let i = 0; i < addresses.length; ++i) {
   state[addresses[i].dataset.address.split(":")[1]] = {
     checked: false,
     open: false

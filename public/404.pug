@@ -1,5 +1,6 @@
 extends layout.pug
 
 block content
-    p Sorry, can't find that FSR.
+    p Sorry, can't find that FSR. Please make sure you have typed your FSR correctly.
+    p It is possible that your route has not yet been uploaded. Last upload to server was #{locals.lastExport} ago. Please contact the dispatcher if your route has been assigned since then.
     a(href=locals.app) Go back. 

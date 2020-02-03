@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 /* const populateTestData = require("./util/populateTestData"); */
 const config = require("./config");
+var db = require("text-db")("./db");
+const dates = require("./util/dates");
 
 const DEV = process.argv[2] && process.argv[2] == "--devMode";
 
@@ -18,34 +20,39 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.render(path.join(__dirname + "/public/index.pug"), {
-    app: DEV ? config.dev : config.prod
+    app: DEV ? config.dev : config.prod,
+    techs: db.getKeys()
   });
 });
-
-const state = {};
 
 app.post("/", (req, res) => {
   let route = req.body;
 
   for (let [key, value] of Object.entries(route)) {
-    state[key] = value;
+    db.setItem(key, { route: value, timestamp: Date.now() });
+    db.setItem("lastExport", Date.now());
   }
-
-  console.log(state);
 
   res.status(200).json({ message: "success!" });
 });
 
 app.get("/:tech", (req, res) => {
-  if (state[req.params.tech]) {
+  let techExists = db.getKeys().some(key => key == req.params.tech);
+  if (techExists) {
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: DEV ? config.dev : config.prod,
-      arr: state[req.params.tech],
-      tech: req.params.tech
+      arr: db.getItem(req.params.tech).route,
+      tech: req.params.tech,
+      timestamp: dates.relative(
+        db.getItem(req.params.tech).timestamp,
+        Date.now()
+      ),
+      date: dates.full()
     });
   } else {
     res.render(path.join(__dirname + "/public/404.pug"), {
-      app: DEV ? config.dev : config.prod
+      app: DEV ? config.dev : config.prod,
+      lastExport: dates.relative(db.getItem("lastExport"), Date.now())
     });
   }
 });

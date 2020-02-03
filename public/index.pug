@@ -6,6 +6,11 @@ block content
         form
             input(type="text" id="FSR" name="FSR" required)
             label(for="FSR")
+        //h3 Or, Select from List:
+        //div.fsr-list
+            ul
+                each tech in locals.techs
+                    li #{tech}
         button.button--primary
             a(href=locals.app, data-endpoint=locals.app)#submit Route My List
 
