@@ -3,8 +3,12 @@ const express = require("express");
 const app = express();
 /* const populateTestData = require("./util/populateTestData"); */
 const config = require("./config");
-var db = require("text-db")("./db");
 const dates = require("./util/dates");
+const fs = require("fs");
+const util = require("util");
+
+const readdir = util.promisify(fs.readdir);
+const readFile = util.promisify(fs.readFile);
 
 const DEV = process.argv[2] && process.argv[2] == "--devMode";
 
@@ -20,8 +24,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.render(path.join(__dirname + "/public/index.pug"), {
-    app: DEV ? config.dev : config.prod,
-    techs: db.getKeys()
+    app: DEV ? config.dev : config.prod
   });
 });
 
@@ -29,30 +32,36 @@ app.post("/", (req, res) => {
   let route = req.body;
 
   for (let [key, value] of Object.entries(route)) {
-    db.setItem(key, { route: value, timestamp: Date.now() });
-    db.setItem("lastExport", Date.now());
+    let currentTime = Date.now();
+    fs.writeFile(
+      `./store/${key}.json`,
+      JSON.stringify({ route: value, timestamp: currentTime }),
+      err => {
+        if (err) throw err;
+        console.log("The file has been saved!");
+      }
+    );
   }
 
   res.status(200).json({ message: "success!" });
 });
 
-app.get("/:tech", (req, res) => {
-  let techExists = db.getKeys().some(key => key == req.params.tech);
+app.get("/:tech", async (req, res) => {
+  let tech = req.params.tech;
+  let techArr = await readdir("./store");
+  let techExists = techArr.some(x => x.split(".json")[0] == tech);
   if (techExists) {
+    let route = JSON.parse(await readFile(`./store/${tech}.json`, "utf-8"));
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: DEV ? config.dev : config.prod,
-      arr: db.getItem(req.params.tech).route,
+      arr: route.route,
       tech: req.params.tech,
-      timestamp: dates.relative(
-        db.getItem(req.params.tech).timestamp,
-        Date.now()
-      ),
+      timestamp: dates.relative(route.timestamp, Date.now()),
       date: dates.full()
     });
   } else {
     res.render(path.join(__dirname + "/public/404.pug"), {
-      app: DEV ? config.dev : config.prod,
-      lastExport: dates.relative(db.getItem("lastExport"), Date.now())
+      app: DEV ? config.dev : config.prod
     });
   }
 });

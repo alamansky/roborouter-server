@@ -35,7 +35,7 @@ gulp.task("default", function() {
 
   gulp.watch(sassPath, gulp.series("sass"));
 
-  gulp.watch(cssPath).on("change", reload);
+  //gulp.watch(cssPath).on("change", reload);
   gulp.watch(htmlPath).on("change", reload);
   gulp.watch(jsPath).on("change", reload);
 });

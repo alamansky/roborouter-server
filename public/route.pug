@@ -7,7 +7,7 @@ block content
     +warning('This list does not include appointments.')(id="appts")
     +warning(`Last updated ${locals.timestamp} ago.`)(id="timestamp")
   <br>
-    ul.route-list
+    ol.route-list
       each street, index1 in locals.arr
         each wo, index2 in street
             li.route-list--row(data-row=`row:${index1}-${index2}`)
