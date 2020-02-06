@@ -21,7 +21,7 @@ yarn-error.log*
 *.csv
 
 # text data
-/store/*.json
+store/*.json
 
 #test data
 
