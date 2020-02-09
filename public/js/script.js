@@ -1,6 +1,6 @@
 const list = document.querySelector(".route-list");
 
-const addresses = Array.from(document.querySelectorAll(".route-list--address"));
+const addresses = Array.from(document.querySelectorAll(".account__address"));
 
 // init state
 const state = {};

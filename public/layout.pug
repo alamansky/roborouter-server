@@ -3,15 +3,20 @@ html(lang="en")
     head
         link(rel='stylesheet' type='text/css' href="/css/style.css")/
         //link(href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet")/
+        link(rel="manifest" href="/manifest.webmanifest")
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        meta(name="theme-color" content="#fff")
+        link(rel="apple-touch-icon" href="./icons/icon.png")
+        link(rel="icon" type="image/png" href="./icons/icon.png")
         title= RoboRouter
     body
-        header
-            a.home(href= locals.app)
+        header.header
+            a.header__home(href= locals.app)
                 i.gg-home
-            h1.title RoboRouter
+            h1.header__title RoboRouter
         div.wrapper
             block content
             block scripts
             script(src='/js/layout.js')
-    footer
-        div.progress-bar
+    footer.footer
+        div.footer__progress-bar

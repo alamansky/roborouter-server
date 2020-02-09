@@ -1,5 +1,5 @@
 .gg-home {
-  --ggs: 4;
+  --ggs: 1;
   background: linear-gradient(to left, currentColor 5px, transparent 0) no-repeat 0 bottom/4px 2px, linear-gradient(to left, currentColor 5px, transparent 0) no-repeat right bottom/4px 2px;
   box-sizing: border-box;
   position: relative;

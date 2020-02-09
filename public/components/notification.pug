@@ -1,0 +1,5 @@
+mixin notification(text, id)
+  .notification
+    i.gg-info
+    p.notification__text= text
+    i.gg-close(id!=attributes.id)

@@ -1,0 +1,15 @@
+.visible {
+  display: block !important;
+}
+
+.invisible {
+  display: none !important;
+}
+
+.divider {
+  height: 1px;
+  background-color: none;
+  @media #{$mq_desktop} {
+    background-color: black;
+  }
+}

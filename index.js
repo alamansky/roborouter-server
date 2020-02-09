@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-/* const populateTestData = require("./util/populateTestData"); */
+const populateTestData = require("./util/populateTestData");
 const config = require("./config");
 const dates = require("./util/dates");
 const fs = require("fs");
@@ -34,7 +34,7 @@ app.post("/", (req, res) => {
   for (let [key, value] of Object.entries(route)) {
     let currentTime = Date.now();
     fs.writeFile(
-      `./store/${key}.json`,
+      `./public/store/${key}.json`,
       JSON.stringify({ route: value, timestamp: currentTime }),
       err => {
         if (err) throw err;
@@ -48,10 +48,12 @@ app.post("/", (req, res) => {
 
 app.get("/:tech", async (req, res) => {
   let tech = req.params.tech;
-  let techArr = await readdir("./store");
+  let techArr = await readdir("./public/store");
   let techExists = techArr.some(x => x.split(".json")[0] == tech);
   if (techExists) {
-    let route = JSON.parse(await readFile(`./store/${tech}.json`, "utf-8"));
+    let route = JSON.parse(
+      await readFile(`./public/store/${tech}.json`, "utf-8")
+    );
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: DEV ? config.dev : config.prod,
       arr: route.route,
@@ -68,4 +70,5 @@ app.get("/:tech", async (req, res) => {
 
 app.listen(PORT, () => console.log(`server running on ${PORT}`));
 
-/* (async () => await populateTestData(PORT))(); */
+/* (async () => await populateTestData(PORT))();
+ */

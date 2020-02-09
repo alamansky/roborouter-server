@@ -1,32 +1,33 @@
 extends layout.pug
-include components/warning.pug
+include components/notification.pug
 
 block content
   h2#subheader= `${locals.tech}\t|\t${locals.date}`
   div#dash
-    +warning('This list does not include appointments.')(id="appts")
-    +warning(`Last updated ${locals.timestamp} ago.`)(id="timestamp")
+    +notification('List does not include appointments.')(id="appts")
+    +notification(`Last updated ${locals.timestamp} ago.`)(id="timestamp")
   <br>
     ol.route-list
       each street, index1 in locals.arr
         each wo, index2 in street
-            li.route-list--row(data-row=`row:${index1}-${index2}`)
+            li.account(data-row=`row:${index1}-${index2}`)
               span
-                input(type='checkbox' name='address' data-check=`check:${index1}-${index2}`).route-list--check
-              p.route-list--address(data-address=`address:${index1}-${index2}`)= wo[0].slice(0, 2).join(' ')
+                input(type='checkbox' name='address' data-check=`check:${index1}-${index2}`).account__check
+              p.account__address(data-address=`address:${index1}-${index2}`)= wo[0].slice(0, 2).join(' ')
               button.icon--plus.gg-add(data-icon=`icon:${index1}-${index2}`)
-              div.address--details(data-details=`details:${index1}-${index2}`)
-                ul.address--details--list
-                  li.address--details--row
-                    span Meter Number:
-                    span= wo[1][0]
-                  li.address--details--row
-                    span Location:
-                    span= wo[1][1].split('-').slice(-1)
-                  li.address--details--row
-                    span Info:
-                    span= wo[1][2].split('   ')[1]
+              ul.account__details(data-details=`details:${index1}-${index2}`)
+                li.account__details__item
+                  span Meter Number:
+                  span= wo[1][0]
+                div.divider
+                li.account__details__item
+                  span Location:
+                  span= wo[1][1].split('-').slice(-1)
+                div.divider
+                li.account__details__item
+                  span Info:
+                  span= wo[1][2].split('   ')[1]
 
 block scripts
   script(src='/js/script.js')
-  script(src='/js/warning.js')
+  script(src='/js/notification.js')

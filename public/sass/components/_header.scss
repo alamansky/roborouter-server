@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: red;
+  color: white;
+  height: 5rem;
+  /* padding: 2rem 4rem 2rem 8rem; */
+
+  &__title {
+    margin-left: 2rem;
+    //flex-grow: 1;
+  }
+
+  &__home {
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+}
+
+#subheader {
+  text-align: center;
+}

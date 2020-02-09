@@ -1,0 +1,14 @@
+footer.footer {
+  position: fixed;
+  bottom: 0;
+  height: 1rem;
+  width: 100%;
+  background-color: red;
+
+  &__progress-bar {
+    background-color: green;
+    height: 100%;
+    width: 0;
+    transition: 0.2s ease all;
+  }
+}

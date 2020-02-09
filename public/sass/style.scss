@@ -1,125 +1,15 @@
-@import "./tags.scss";
-@import "./layout.scss";
-@import "./icons/icons.scss";
+@import "./variables";
+@import "./base";
+@import "./layout";
+@import "./util";
+@import "./icons/icons";
+@import "./components/header";
+@import "./components/header";
+@import "./components/icon";
+@import "./components/buttons";
+@import "./components/route-list";
+@import "./components/notification";
+@import "./components/search";
 
-.warning {
-  display: flex;
-  align-items: center;
-  padding: 1rem 3rem 1rem 3rem;
-  margin-bottom: 1rem;
-  background-color: rgba(255, 0, 0, 0.4);
-  font-size: 2rem;
-  color: white;
-  text-align: center;
-}
-
-.warning--text {
-  flex: 1;
-}
-
-.progress-bar {
-  background-color: green;
-  height: 100%;
-  width: 0;
-  transition: 0.2s ease all;
-}
-
-#subheader {
-  text-align: center;
-}
-
-.sneaky {
-  opacity: 0.5;
-}
-
-.route-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.route-list--row {
-  padding: 1rem 3rem 1rem 1rem;
-  border-bottom: 1px solid black;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  position: relative;
-}
-
-.route-list--address {
-  flex-basis: 1;
-  flex-grow: 1;
-}
-
-.address--details {
-  background-color: white;
-  width: 100%;
-  display: none;
-  padding: 2rem;
-}
-
-.address--details--list {
-  padding: 0;
-  margin: 0;
-}
-
-.address--details--row {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0 1rem 0;
-}
-
-.icon--plus {
-  background-color: rgba(0, 0, 0, 0);
-  outline: 0;
-}
-
-.route-list--row:nth-child(2n) {
-  background-color: lightblue;
-}
-
-.route-list--check {
-  height: 5rem;
-  width: 5rem;
-  margin-right: 2rem;
-  border-radius: 10px;
-}
-
-.button--primary {
-  height: 6rem;
-  width: 25rem;
-  font-size: 3rem;
-}
-
-#home {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 30vh;
-}
-
-#submit {
-  text-decoration: none;
-  color: black;
-}
-
-#intro {
-  max-width: 70%;
-  text-align: center;
-}
-
-.visible {
-  display: block !important;
-}
-
-.invisible {
-  display: none !important;
-}
-
-.fsr-list {
-  width: 100%;
-  min-height: 30vh;
-  border: 2px solid grey;
-}
+/* @media #{$mobile} {
+} */
