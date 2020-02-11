@@ -34,7 +34,7 @@ app.post("/", (req, res) => {
   for (let [key, value] of Object.entries(route)) {
     let currentTime = Date.now();
     fs.writeFile(
-      `./public/store/${key}.json`,
+      path.join(__dirname, `./public/store/${key}.json`),
       JSON.stringify({ route: value, timestamp: currentTime }),
       err => {
         if (err) throw err;
@@ -48,11 +48,14 @@ app.post("/", (req, res) => {
 
 app.get("/:tech", async (req, res) => {
   let tech = req.params.tech;
-  let techArr = await readdir("./public/store");
+  let techArr = await readdir(path.join(__dirname, `./public/store/`));
   let techExists = techArr.some(x => x.split(".json")[0] == tech);
   if (techExists) {
     let route = JSON.parse(
-      await readFile(`./public/store/${tech}.json`, "utf-8")
+      await readFile(
+        path.join(__dirname, `./public/store/${tech}.json`),
+        "utf-8"
+      )
     );
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: DEV ? config.dev : config.prod,
