@@ -1,20 +1,20 @@
+require("dotenv").config();
+
 const path = require("path");
 const express = require("express");
-const app = express();
-const populateTestData = require("./util/populateTestData");
 const config = require("./config");
 const dates = require("./util/dates");
-const fs = require("fs");
-const util = require("util");
 
-const readdir = util.promisify(fs.readdir);
-const readFile = util.promisify(fs.readFile);
+const app = express();
+
+const db = require("./database");
+const routeModel = require("./models/route");
 
 const DEV = process.argv[2] && process.argv[2] == "--devMode";
 
-const defaultPort = DEV ? 3000 : 443;
+const DEFAULT_PORT = DEV ? 3000 : 443;
 
-const PORT = process.env.PORT || defaultPort;
+const PORT = process.env.PORT || DEFAULT_PORT;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -28,35 +28,41 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   let route = req.body;
 
   for (let [key, value] of Object.entries(route)) {
     let currentTime = Date.now();
-    fs.writeFile(
-      path.join(__dirname, `./public/store/${key}.json`),
-      JSON.stringify({ route: value, timestamp: currentTime }),
-      err => {
-        if (err) throw err;
-        console.log("The file has been saved!");
-      }
-    );
-  }
+    let routeExists = await routeModel.exists({ tech: key });
 
-  res.status(200).json({ message: "success!" });
+    if (routeExists) {
+      const updatedRoute = await routeModel.updateOne(
+        { tech: key },
+        { route: value, timestamp: currentTime },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: `modified ${updatedRoute.nModified} doc(s) for ${key}`
+      });
+    } else {
+      let routeObj = { tech: key, route: value, timestamp: currentTime };
+      let newRoute = routeModel(routeObj);
+      newRoute.save().then(route => {
+        console.log(`saved route for ${key}`);
+      });
+      res.status(200).json({
+        message: `all good`
+      });
+    }
+  }
 });
 
 app.get("/:tech", async (req, res) => {
   let tech = req.params.tech;
-  let techArr = await readdir(path.join(__dirname, `./public/store/`));
-  let techExists = techArr.some(x => x.split(".json")[0] == tech);
-  if (techExists) {
-    let route = JSON.parse(
-      await readFile(
-        path.join(__dirname, `./public/store/${tech}.json`),
-        "utf-8"
-      )
-    );
+  let routeExists = await routeModel.exists({ tech });
+  if (routeExists) {
+    let route = await routeModel.findOne({ tech });
     res.render(path.join(__dirname + "/public/route.pug"), {
       app: DEV ? config.dev : config.prod,
       arr: route.route,
