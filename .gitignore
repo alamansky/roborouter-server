@@ -16,10 +16,6 @@ yarn-error.log*
 # eslint cache
 .eslintcache
 
-# routes
-/routes/*
-*.csv
-
 # text data
 /public/store/*.json
 
