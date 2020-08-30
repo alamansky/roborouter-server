@@ -1,0 +1,25 @@
+/** @format */
+
+.tabs {
+	display: flex;
+	justify-content: center;
+	margin: 1rem 0;
+
+	&__button {
+		min-width: 150px;
+	}
+
+	&--active {
+		display: block !important;
+	}
+
+	&--hidden {
+		display: none;
+	}
+}
+
+.tab {
+	display: none;
+	margin: 0;
+	padding: 0;
+}

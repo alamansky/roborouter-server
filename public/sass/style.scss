@@ -1,15 +1,19 @@
-@import "./variables";
-@import "./base";
-@import "./layout";
-@import "./util";
-@import "./icons/icons";
-@import "./components/header";
-@import "./components/header";
-@import "./components/icon";
-@import "./components/buttons";
-@import "./components/route-list";
-@import "./components/notification";
-@import "./components/search";
+/** @format */
+
+@import './variables';
+@import './colors';
+@import './base';
+@import './layout';
+@import './util';
+@import './icons/icons';
+@import './components/header';
+@import './components/header';
+@import './components/icon';
+@import './components/buttons';
+@import './components/route-list';
+@import './components/notification';
+@import './components/search';
+@import './components/tabs';
 
 /* @media #{$mobile} {
 } */

@@ -1,33 +1,37 @@
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
 extends layout.pug
 include components/notification.pug
+include components/list.pug
 
 block content
-  h2#subheader= `${locals.tech}\t|\t${locals.date}`
-  div#dash
-    +notification('List does not include appointments.')(id="appts")
-    +notification(`Last updated ${locals.timestamp} ago.`)(id="timestamp")
-  <br>
-    ol.route-list
-      each street, index1 in locals.arr
-        each wo, index2 in street
-            li.account(data-row=`row:${index1}-${index2}`)
-              span
-                input(type='checkbox' name='address' data-check=`check:${index1}-${index2}`).account__check
-              p.account__address(data-address=`address:${index1}-${index2}`)= wo[0].slice(0, 2).join(' ')
-              button.icon--plus.gg-add(data-icon=`icon:${index1}-${index2}`)
-              ul.account__details(data-details=`details:${index1}-${index2}`)
-                li.account__details__item
-                  span Meter Number:
-                  span= wo[1][0]
-                div.divider
-                li.account__details__item
-                  span Location:
-                  span= wo[1][1].split('-').slice(-1)
-                div.divider
-                li.account__details__item
-                  span Info:
-                  span= wo[1][2].split('   ')[1]
+	h2#subheader= `${locals.tech}\t|\t${locals.date}`
+	#dash
+		+notification('List does not include appointments.')#appts
+		+notification(`Last updated ${locals.timestamp} ago.`)#timestamp
+		if locals.cc
+			- var ccQuantity = locals.cc.reduce((acc, val) => (acc += val.length), 0);
+		if locals.arr
+			- var prodQuantity = locals.arr.reduce((acc, val) => (acc += val.length), 0);
+		if (locals.arr && locals.cc)
+			- var bothLists = true;
+			.tabs
+				button.tabs__button.button--tab(data-view='cc', class=`${bothLists ? "button--tab--active" : null}`)= `cannot-completes (${ccQuantity})`
+				button.tabs__button.button--tab(data-view='prod')= `production (${prodQuantity})`
+		.tab-container.route-list
+			if locals.cc
+				+list(locals.cc, locals.funcs, "cc", bothLists)
+			if locals.arr
+				+list(locals.arr, locals.funcs, "prod", bothLists)
 
 block scripts
-  script(src='/js/script.js')
-  script(src='/js/notification.js')
+	script(src='/js/script.js')
+	script(src='/js/notification.js')
+	script(src='/js/tabs.js')

@@ -1,15 +1,69 @@
+/** @format */
+
+@use "sass:map";
+
 .visible {
-  display: block !important;
+	display: block !important;
 }
 
 .invisible {
-  display: none !important;
+	display: none !important;
 }
 
 .divider {
-  height: 1px;
-  background-color: none;
-  @media #{$mq_desktop} {
-    background-color: black;
-  }
+	height: 1px;
+	background-color: none;
+	@media #{$mq_desktop} {
+		background-color: black;
+	}
+}
+
+.bold {
+	font-weight: 600;
+}
+
+.italic {
+	font-style: italic;
+}
+
+$colors: (
+	5: #ff0000,
+	4: #e56500,
+	3: #ffc400,
+	2: #85b300,
+	1: #00cc00,
+);
+
+@function getColor($key) {
+	@if map-has-key($colors, $key) {
+		@return map-get($colors, $key);
+	}
+
+	@warn 'Unknown `#{$key}` in $colors.';
+
+	@return null;
+}
+
+@for $i from 1 through 5 {
+	.border-left-#{$i} {
+		border-left: 8px solid getColor($i);
+	}
+}
+
+.gradient {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 1rem;
+	color: rgba(0, 0, 0, 0.5);
+	margin-bottom: 1rem;
+
+	&__scale {
+		height: 10px;
+		margin: 0.5rem 0;
+		background-image: linear-gradient(to left, #ff0000, #e56500, #ffc400, #85b300, #00cc00);
+	}
+
+	&__guide {
+		display: flex;
+		justify-content: space-between;
+	}
 }

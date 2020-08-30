@@ -1,18 +1,20 @@
+//- @prettier
+//- @prettier
 extends layout.pug
 
 block content
-    div#home
-        h3 Please enter your FSR:
-        form
-            input(type="text" id="FSR" class="fsr-search" name="FSR" required)
-            label(for="FSR")
-        //h3 Or, Select from List:
-        //div.fsr-list
-            ul
-                each tech in locals.techs
-                    li #{tech}
-        button.button--primary
-            a(href=locals.app, data-endpoint=locals.app)#submit Route My List
+	#home
+		h3 Please enter your FSR:
+		form
+			input#FSR.fsr-search(type='text', name='FSR', required)
+			label(for='FSR')
+		//h3 Or, Select from List:
+		//div.fsr-list
+			ul
+			    each tech in locals.techs
+			        li #{tech}
+		button.button--primary
+			a#submit(href=locals.app, data-endpoint=locals.app) Route My List
 
 block scripts
-    script(src='/js/index.js')
+	script(src='/js/index.js')

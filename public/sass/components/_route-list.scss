@@ -1,43 +1,78 @@
+/** @format */
+
 .route-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	&__header {
+		display: flex;
+		background-color: rgba(0, 0, 0, 0.1);
+		justify-content: space-between;
+		border: 2px solid rgba(0, 0, 0, 0.5);
+
+		&__address {
+			margin-left: 4.5rem;
+		}
+
+		&__zip {
+			margin-right: 2rem;
+		}
+	}
+}
+
+.x {
+	display: flex;
+	justify-content: stretch;
+	align-items: center;
+	width: 100%;
 }
 
 .account {
-  padding: 1rem;
-  border-bottom: 1px solid black;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  position: relative;
+	padding: 1rem;
+	border-top: 1px solid rgba(0, 0, 0, 0.5);
+	border-right: 1px solid rgba(0, 0, 0, 0.5);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	position: relative;
 
-  &:nth-child(2n) {
-    background-color: lightblue;
-  }
+	&:last-child {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+	}
 
-  &__check {
-    height: 2rem;
-    width: 2rem;
-    margin-right: 1rem;
-    border-radius: 10px;
-  }
+	&:nth-child(2n) {
+		background-color: lightblue;
+	}
 
-  &__address {
-    flex-basis: 1;
-    flex-grow: 1;
-  }
+	&__check {
+		height: 2rem;
+		width: 2rem;
+		margin-right: 1rem;
+		border-radius: 10px;
+	}
 
-  &__details {
-    width: 100%;
-    display: none;
-    padding: 0;
-    margin-top: 1rem;
+	&__address {
+		flex-basis: 1;
+		flex-grow: 1;
 
-    &__item {
-      display: flex;
-      justify-content: space-between;
-      margin: 0.5rem 0;
-    }
-  }
+		&__line {
+			display: flex;
+			justify-content: space-between;
+			margin: 0 1rem 0 0;
+		}
+	}
+
+	&__details {
+		width: 100%;
+		display: none;
+		padding: 0;
+		margin-top: 1rem;
+
+		&__item {
+			display: flex;
+			justify-content: space-between;
+			margin: 0.5rem 0;
+		}
+	}
 }

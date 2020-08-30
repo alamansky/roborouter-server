@@ -1,0 +1,53 @@
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+//- @prettier
+mixin list(list, funcs, type)
+	ol.tab(id=`${type}`, class=`${type == "prod" && bothLists ? null : "tabs--active"}`)
+		.gradient
+			p= "Days on handheld:"
+			.gradient__scale
+			.gradient__guide
+				span= "1"
+				span= "2"
+				span= "3"
+				span= "4"
+				span= "5"
+		.route-list__header.italic
+			p.route-list__header__address= "Address"
+			p.route-list__header__zip= "Zip Code"
+		each street, index1 in list
+			each wo, index2 in street
+				li.account(data-row=`row:${type}-${index1}-${index2}`, class=funcs.assignBorderClass(wo[1][3]))
+					.x
+						span
+							input.account__check(type='checkbox', name='address', data-check=`check:${type}-${index1}-${index2}`)
+						.account__address(data-address=`address:${type}-${index1}-${index2}`)
+							if type == "cc"
+								.bold.account__address__line
+									span= `${wo[0].slice(0, 2).join(" ")}`
+									span= wo[0].slice(4).join(" ")
+								p= `${wo[2][2]}: "${wo[2][3] || "[no last visit comment]"}"`
+								p= `- ${wo[2][1]} on ${wo[2][0].split(" ")[0]}`
+							if type == "prod"
+								.bold.account__address__line
+									span= `${wo[0].slice(0, 2).join(" ")}`
+									span= wo[0].slice(4).join(" ")
+						button.icon--plus.gg-add(data-icon=`icon:${type}-${index1}-${index2}`)
+					ul.account__details(data-details=`details:${type}-${index1}-${index2}`)
+						li.account__details__item
+							span Meter Number:
+							span= wo[1][0]
+						.divider
+						li.account__details__item
+							span Location:
+							span= wo[1][1].split("-").slice(-1)
+						.divider
+						li.account__details__item
+							span Info:
+							span= wo[1][2].split("   ")[1]

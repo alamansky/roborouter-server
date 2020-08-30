@@ -9,7 +9,7 @@ const state = {};
 for (let i = 0; i < addresses.length; ++i) {
   state[addresses[i].dataset.address.split(":")[1]] = {
     checked: false,
-    open: false
+    open: false,
   };
 }
 
@@ -18,8 +18,9 @@ const getKey = (elem, component) => elem.dataset[component].split(":")[1];
 const getElementByKey = (key, component) =>
   document.querySelector(`[data-${component}='${component}:${key}']`);
 
-let handleClick = e => {
+let handleClick = (e) => {
   let elem = e.target;
+  console.log(e.target.tagName);
 
   switch (true) {
     case /P|INPUT/.test(elem.tagName): {
@@ -43,9 +44,9 @@ let handleClick = e => {
         value.checked && ++progress;
         ++total;
       }
-      document.querySelector(".progress-bar").style.width = `${(progress /
-        total) *
-        100}%`;
+      document.querySelector(".progress-bar").style.width = `${
+        (progress / total) * 100
+      }%`;
       break;
     }
     case /BUTTON|button/.test(elem.tagName): {
@@ -63,4 +64,4 @@ let handleClick = e => {
   }
 };
 
-list.addEventListener("click", e => handleClick(e));
+list.addEventListener("click", (e) => handleClick(e));

@@ -1,7 +1,8 @@
 const dates = {
   full: () =>
-    `${new Date().getMonth() +
-      1}-${new Date().getDate()}-${new Date().getFullYear()}`,
+    `${
+      new Date().getMonth() + 1
+    }-${new Date().getDate()}-${new Date().getFullYear()}`,
   relative: (firstTime, secondTime) => {
     let seconds = Math.round(Math.abs((firstTime - secondTime) / 1000));
     if (seconds < 60) {
@@ -16,7 +17,14 @@ const dates = {
     return `${hours} ${
       hours == 1 ? "hour" : "hours"
     } and ${remainingMinutes} minutes`;
-  }
+  },
+  sortFullDates: (arr) => {
+    let sortedArr = arr;
+    for (i = 2; i >= 0; --i) {
+      sortedArr.sort((a, b) => a.split("/")[i] - b.split("/")[i]);
+    }
+    return sortedArr;
+  },
 };
 
 module.exports = dates;
