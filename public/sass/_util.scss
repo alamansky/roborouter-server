@@ -32,6 +32,7 @@ $colors: (
 	3: #ffc400,
 	2: #85b300,
 	1: #00cc00,
+	0: #00cc00,
 );
 
 @function getColor($key) {
@@ -44,7 +45,7 @@ $colors: (
 	@return null;
 }
 
-@for $i from 1 through 5 {
+@for $i from 0 through 5 {
 	.border-left-#{$i} {
 		border-left: 8px solid getColor($i);
 	}
